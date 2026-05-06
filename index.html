@@ -70,6 +70,48 @@
             padding: 30px 20px;
         }
         
+        /* ========== VIDEO AD PLAYER SECTION ========== */
+        .ad-player-section {
+            background: #0f3460;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid #e94560;
+        }
+        
+        .ad-player-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #4ecdc4;
+            text-align: center;
+        }
+        
+        .ad-video-container {
+            width: 100%;
+            background: black;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        #adVideo {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .ad-status {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .status-loading { color: #ffaa00; }
+        .status-playing { color: #4ecdc4; }
+        .status-complete { color: #00ff88; }
+        .status-error { color: #e94560; }
+        
         .featured-video {
             background: #0f3460;
             border-radius: 20px;
@@ -201,6 +243,17 @@
     </div>
 
     <div class="container">
+        <!-- ========== VIDEO AD PLAYER - AD WILL APPEAR HERE ========== -->
+        <div class="ad-player-section">
+            <div class="ad-player-title">🎬 Video Advertisement (20 seconds)</div>
+            <div class="ad-video-container">
+                <video id="adVideo" controls width="100%" autoplay muted>
+                    <source src="" type="video/mp4">
+                </video>
+            </div>
+            <div class="ad-status" id="adStatus">⏳ Loading video ad...</div>
+        </div>
+
         <!-- FEATURED VIDEO SECTION -->
         <div class="featured-video">
             <div class="video-wrapper">
@@ -286,27 +339,69 @@
         <p>📍 Serving video content worldwide | Daily updates</p>
     </div>
 
-    <!-- ExoClick VAST Ad Integration -->
+    <!-- ExoClick VAST Ad Integration with Video.js Player -->
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vast-client-js@5.6.0/dist/vast-client.min.js"></script>
+
     <script>
-        // Your ExoClick VAST URL
-        var vastUrl = "https://s.magsrv.com/v1/vast.php?idzone=5920360&ex_av=name";
+        // Your ExoClick VAST URL (Zone: 5920360)
+        const vastUrl = "https://s.magsrv.com/v1/vast.php?idzone=5920360&ex_av=name";
         
-        // Display console info
+        // Get elements
+        const adVideo = document.getElementById('adVideo');
+        const adStatus = document.getElementById('adStatus');
+        
+        // Display IP info
         fetch('https://api.ipify.org')
             .then(r => r.text())
             .then(ip => {
                 console.log('🌐 ExoClick Active | IP:', ip, '| Zone: 5920360');
             });
         
-        // Load VAST ad
-        var script = document.createElement('script');
-        script.src = vastUrl;
-        document.head.appendChild(script);
+        // Set status with color class
+        function setStatus(message, className) {
+            adStatus.innerHTML = message;
+            adStatus.className = 'ad-status ' + className;
+        }
         
-        // Video tracking
-        const video = document.getElementById('mainVideo');
-        video.addEventListener('play', () => console.log('▶️ Video playing'));
-        video.addEventListener('ended', () => console.log('✅ Video completed'));
+        // Load and play VAST ad
+        setStatus('⏳ Loading video ad from ExoClick...', 'status-loading');
+        
+        const vastClient = new VAST.Client();
+        
+        vastClient.get(vastUrl, (response) => {
+            if (response && response.ads && response.ads.length > 0) {
+                const ad = response.ads[0];
+                const creative = ad.creatives[0];
+                const mediaFile = creative.mediaFiles[0];
+                
+                if (mediaFile && mediaFile.fileURL) {
+                    setStatus('🎬 Playing video ad (20 seconds)...', 'status-playing');
+                    adVideo.src = mediaFile.fileURL;
+                    adVideo.play();
+                    
+                    // Track ad completion
+                    setTimeout(() => {
+                        setStatus('✅ Video ad completed! Impression counted!', 'status-complete');
+                        console.log('✅ Ad completed - You earned money!');
+                    }, 20000);
+                } else {
+                    setStatus('⚠️ No video file found in VAST response', 'status-error');
+                }
+            } else {
+                setStatus('ℹ️ No video ad available (normal for new zones - wait 24-48 hours)', 'status-error');
+                console.log('ℹ️ Empty VAST response - no ad to show');
+            }
+        }, (err) => {
+            console.log('VAST error:', err);
+            setStatus('⏳ Waiting for ad inventory... Ads will appear in 24-48 hours', 'status-error');
+        });
+        
+        // Main video tracking
+        const mainVideo = document.getElementById('mainVideo');
+        mainVideo.addEventListener('play', () => console.log('▶️ Main video playing'));
+        mainVideo.addEventListener('ended', () => console.log('✅ Main video completed'));
     </script>
 </body>
 </html>
