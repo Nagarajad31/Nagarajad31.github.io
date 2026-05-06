@@ -1,12 +1,312 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>VideoHub - Watch Trending Videos Online</title>
+    <meta name="description" content="Watch the latest viral videos, trending clips, and exclusive content. Daily updates from around the world.">
+    <meta name="keywords" content="videos, trending, viral, entertainment, video player, watch online">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta name="6a97888e-site-verification" content="6913ffb8c5204396634ba593afb86658">
-    <title>clickkkk</title>
+    <!-- ExoClick Client Hints -->
+    <meta http-equiv="Delegate-CH" content="Sec-CH-UA https://s.magsrv.com; Sec-CH-UA-Mobile https://s.magsrv.com; Sec-CH-UA-Arch https://s.magsrv.com; Sec-CH-UA-Model https://s.magsrv.com; Sec-CH-UA-Platform https://s.magsrv.com; Sec-CH-UA-Platform-Version https://s.magsrv.com; Sec-CH-UA-Bitness https://s.magsrv.com; Sec-CH-UA-Full-Version-List https://s.magsrv.com; Sec-CH-UA-Full-Version https://s.magsrv.com;">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #0f3460, #16213e);
+            padding: 20px 0;
+            border-bottom: 3px solid #e94560;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #e94560;
+        }
+        
+        .logo p {
+            font-size: 0.8rem;
+            color: #4ecdc4;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover {
+            color: #e94560;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .featured-video {
+            background: #0f3460;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            background: black;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .video-title {
+            font-size: 1.5rem;
+            margin: 15px 0 5px 0;
+            color: #e94560;
+        }
+        
+        .video-stats {
+            color: #4ecdc4;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .video-description {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-left: 4px solid #e94560;
+            padding-left: 15px;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .video-card {
+            background: #0f3460;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(233,69,96,0.3);
+        }
+        
+        .video-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 15px;
+        }
+        
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .card-stats {
+            font-size: 0.7rem;
+            color: #4ecdc4;
+        }
+        
+        .footer {
+            background: #0a0a1a;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            border-top: 1px solid #e94560;
+        }
+        
+        .footer p {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav a {
+                margin: 0 15px;
+            }
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Clickk Video Site</h1>
-    <p>This site is verified for video ads.</p>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>🎬 VideoHub</h1>
+                <p>Your Daily Dose of Entertainment</p>
+            </div>
+            <div class="nav">
+                <a href="#">Home</a>
+                <a href="#">Trending</a>
+                <a href="#">Categories</a>
+                <a href="#">About</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- FEATURED VIDEO SECTION -->
+        <div class="featured-video">
+            <div class="video-wrapper">
+                <video id="mainVideo" controls width="100%">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFunflies.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="video-title">🔥 Amazing Nature Compilation | 4K Ultra HD</div>
+            <div class="video-stats">📺 1.2M views • 🔥 Trending #5 • 👍 45K likes</div>
+            <div class="video-description">
+                Experience the beauty of nature in stunning 4K resolution. From majestic mountains to serene oceans, 
+                this compilation showcases the most breathtaking locations on Earth. Don't forget to subscribe for daily uploads!
+            </div>
+        </div>
+
+        <!-- TRENDING SECTION -->
+        <h2 class="section-title">📈 Trending Now</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <img src="https://via.placeholder.com/280x160/0f3460/e94560?text=Video+Thumbnail" alt="Video thumbnail">
+                <div class="card-content">
+                    <div class="card-title">Top 10 Most Amazing Discoveries</div>
+                    <div class="card-stats">🔥 850K views • 2 days ago</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <img src="https://via.placeholder.com/280x160/0f3460/4ecdc4?text=Video+Thumbnail" alt="Video thumbnail">
+                <div class="card-content">
+                    <div class="card-title">Incredible Wildlife Moments</div>
+                    <div class="card-stats">🔥 623K views • 5 days ago</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <img src="https://via.placeholder.com/280x160/0f3460/e94560?text=Video+Thumbnail" alt="Video thumbnail">
+                <div class="card-content">
+                    <div class="card-title">Travel Guide: Hidden Gems 2026</div>
+                    <div class="card-stats">🔥 502K views • 1 week ago</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <img src="https://via.placeholder.com/280x160/0f3460/4ecdc4?text=Video+Thumbnail" alt="Video thumbnail">
+                <div class="card-content">
+                    <div class="card-title">Technology Future Trends</div>
+                    <div class="card-stats">🔥 445K views • 3 days ago</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORY SECTION -->
+        <h2 class="section-title">🎯 Popular Categories</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="card-content">
+                    <div class="card-title">🎮 Gaming</div>
+                    <div class="card-stats">124 videos • 2.3M views</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="card-content">
+                    <div class="card-title">🎵 Music</div>
+                    <div class="card-stats">89 videos • 1.8M views</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="card-content">
+                    <div class="card-title">📰 News</div>
+                    <div class="card-stats">56 videos • 987K views</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="card-content">
+                    <div class="card-title">🍿 Entertainment</div>
+                    <div class="card-stats">203 videos • 4.1M views</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 VideoHub - Your Daily Video Entertainment | All Rights Reserved</p>
+        <p>📍 Serving video content worldwide | Daily updates</p>
+    </div>
+
+    <!-- ExoClick VAST Ad Integration -->
+    <script>
+        // Your ExoClick VAST URL
+        var vastUrl = "https://s.magsrv.com/v1/vast.php?idzone=5920360&ex_av=name";
+        
+        // Display console info
+        fetch('https://api.ipify.org')
+            .then(r => r.text())
+            .then(ip => {
+                console.log('🌐 ExoClick Active | IP:', ip, '| Zone: 5920360');
+            });
+        
+        // Load VAST ad
+        var script = document.createElement('script');
+        script.src = vastUrl;
+        document.head.appendChild(script);
+        
+        // Video tracking
+        const video = document.getElementById('mainVideo');
+        video.addEventListener('play', () => console.log('▶️ Video playing'));
+        video.addEventListener('ended', () => console.log('✅ Video completed'));
+    </script>
 </body>
 </html>
